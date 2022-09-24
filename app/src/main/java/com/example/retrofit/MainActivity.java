@@ -1,11 +1,13 @@
 package com.example.retrofit;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ProgressBar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 
@@ -16,18 +18,15 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity {
-    private List<Property> propertyList;
-
+    private ProgressBar progressBar ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Todo Call getList()
+        progressBar = findViewById(R.id.pbHeaderProgress);
+        getList();
 
     }
-
-
-
 
     private void getList() {
         Api.getClient().getPropertyList(new Callback<List<Property>>() {
@@ -35,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
             public void success(List<Property> properties, Response response) {
                 Gson gson = new Gson();
                 Log.d("******** properties ", gson.toJson(properties));
-                propertyList = properties;
-                //Todo Call list
+                progressBar.setVisibility(View.INVISIBLE);
+                initList(properties);
             }
 
             @Override
@@ -47,5 +46,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    private void initList(List<Property> myListData){
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        MyListAdapter adapter = new MyListAdapter(myListData, getApplicationContext());
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+    }
+
 }
 
