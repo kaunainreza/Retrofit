@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.retrofit.R;
-import com.example.retrofit.repositories.DatabaseHandler;
 import com.example.retrofit.repositories.DatabaseRepo;
 
 import java.util.List;
@@ -44,6 +43,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Property myListData = listdata.get(position);
         holder.textView.setText(listdata.get(position).getId());
+        holder.textViewP.setText(listdata.get(position).getPrice().toString());
 
         Boolean isSelected = listdata.get(position).getIsSelected();
         if (isSelected == null) isSelected = false;
@@ -80,6 +80,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
         public TextView textView;
+        public TextView textViewP;
         public CheckBox checkBox;
         public RelativeLayout relativeLayout;
 
@@ -87,6 +88,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
             super(itemView);
             this.imageView = (ImageView) itemView.findViewById(R.id.imageView);
             this.textView = (TextView) itemView.findViewById(R.id.textViewId);
+            this.textViewP = (TextView) itemView.findViewById(R.id.textViewP);
             this.checkBox = (CheckBox) itemView.findViewById(R.id.checkboxSelect);
             relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relativeLayout);
         }
