@@ -1,4 +1,6 @@
-package com.example.retrofit;
+package com.example.retrofit.repositories;
+
+import com.example.retrofit.model.Property;
 
 import java.util.List;
 
