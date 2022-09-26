@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Spinner
+     <Spinner
         android:id="@+id/simpleSpinner"
         android:layout_width="49dp"
         android:layout_height="34dp"
@@ -16,6 +16,17 @@
         android:layout_alignParentBottom="true"
         android:scrollbarSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+
+    <TextView
+        android:layout_width="59dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="4dp"
+        android:text="Filter By"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toStartOf="@+id/simpleSpinner"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView

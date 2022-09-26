@@ -1,6 +1,5 @@
 package com.example.retrofit.repositories;
 
-import com.example.retrofit.repositories.ApiInterface;
 
 import retrofit.RestAdapter;
 

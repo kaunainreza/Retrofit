@@ -25,6 +25,20 @@
 
 
     <TextView
+        android:id="@+id/textViewT"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="86dp"
+        android:layout_marginLeft="86dp"
+        android:layout_toEndOf="@id/imageView"
+        android:layout_toRightOf="@id/imageView"
+        android:gravity="center_vertical"
+        android:text=""
+        android:textSize="16sp" />
+
+    <TextView
         android:id="@+id/textViewP"
         android:layout_width="299dp"
         android:layout_height="match_parent"

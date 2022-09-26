@@ -96,7 +96,7 @@ public class DatabaseRepo {
     }
 
     // code to update the single contact
-    public int updateIsSelected(String  id , Boolean isCheck) {
+    public int updateIsSelected(String  id , Boolean isCheck,String Type) {  //Type
         SQLiteDatabase db = databaseHandler.getWritableDatabase();
 
         ContentValues values = new ContentValues();

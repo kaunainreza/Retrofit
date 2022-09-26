@@ -43,7 +43,9 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Property myListData = listdata.get(position);
         holder.textView.setText(listdata.get(position).getId());
+        holder.textViewT.setText(listdata.get(position).getType());//write here
         holder.textViewP.setText(listdata.get(position).getPrice().toString());
+
 
         Boolean isSelected = listdata.get(position).getIsSelected();
         if (isSelected == null) isSelected = false;
@@ -52,7 +54,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 myListData.setIsSelected(holder.checkBox.isChecked());
-                databaseRepo.updateIsSelected( myListData.getId(),holder.checkBox.isChecked());
+                databaseRepo.updateIsSelected( myListData.getId(),holder.checkBox.isChecked(),myListData.getType());
             }
         });
 
@@ -69,7 +71,18 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
                 Toast.makeText(view.getContext(), "click on item: " + myListData.getPrice(), Toast.LENGTH_LONG).show();
             }
         });
+
+
+
+        holder.textViewT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "click on item: " + myListData.getType(), Toast.LENGTH_LONG).show();
+
+            }
+        });         //.findViewById(R.id.textViewIdT);
     }
+
 
 
     @Override
@@ -81,6 +94,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
         public ImageView imageView;
         public TextView textView;
         public TextView textViewP;
+        public TextView textViewT;
         public CheckBox checkBox;
         public RelativeLayout relativeLayout;
 
@@ -89,6 +103,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
             this.imageView = (ImageView) itemView.findViewById(R.id.imageView);
             this.textView = (TextView) itemView.findViewById(R.id.textViewId);
             this.textViewP = (TextView) itemView.findViewById(R.id.textViewP);
+            this.textViewT = (TextView) itemView.findViewById(R.id.textViewT);
             this.checkBox = (CheckBox) itemView.findViewById(R.id.checkboxSelect);
             relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relativeLayout);
         }
