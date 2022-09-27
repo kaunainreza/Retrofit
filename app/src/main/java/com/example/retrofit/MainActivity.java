@@ -1,10 +1,13 @@
 package com.example.retrofit;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -35,8 +38,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private MyListAdapter adapter;
     private List<Property> propertyList;
     DatabaseRepo databaseRepo;
+    Button button;
+
     String[] shortBy = {"ID", "PRICE", "TYPE","TICKED"};
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         progressBar = findViewById(R.id.pbHeaderProgress);
         spinnerShort = findViewById(R.id.simpleSpinner);
 
+
+
         getList();
 
         propertyList = databaseRepo.getAllContacts();
@@ -53,6 +61,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         initList();
         initSpin();
 
+        button = (Button) findViewById(R.id.moreBtn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                //intent.putExtra("My_Note",propertyList.toString());
+                startActivity(intent);
+
+            }
+        });
     }
 
     private void getList() {
@@ -137,6 +155,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onPointerCaptureChanged(hasCapture);
     }
 }
+
 
 
 

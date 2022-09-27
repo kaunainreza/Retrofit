@@ -4,8 +4,12 @@ package com.example.retrofit.repositories;
 import static com.example.retrofit.repositories.DataBaseEnums.KEY_ID;
 import static com.example.retrofit.repositories.DataBaseEnums.KEY_IMAGE_SRC;
 import static com.example.retrofit.repositories.DataBaseEnums.KEY_IS_SELECTED;
+import static com.example.retrofit.repositories.DataBaseEnums.KEY_NOTE_ID;
+import static com.example.retrofit.repositories.DataBaseEnums.KEY_NOTE_MESSAGE;
+import static com.example.retrofit.repositories.DataBaseEnums.KEY_NOTE_PRICE;
 import static com.example.retrofit.repositories.DataBaseEnums.KEY_PRICE;
 import static com.example.retrofit.repositories.DataBaseEnums.KEY_TYPE;
+import static com.example.retrofit.repositories.DataBaseEnums.TABLE_NOTE;
 import static com.example.retrofit.repositories.DataBaseEnums.TABLE_PROPERTY;
 
 import android.content.Context;
@@ -28,6 +32,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_ID + " TEXT PRIMARY KEY," + KEY_TYPE + " TEXT," +  KEY_IMAGE_SRC + " TEXT ," + KEY_PRICE + " INTEGER,"
                 + KEY_IS_SELECTED + " INTEGER " + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
+
+        String CREATE_NOTE_TABLE = "CREATE TABLE " + TABLE_NOTE + "("
+                + KEY_NOTE_ID + " TEXT PRIMARY KEY," + KEY_NOTE_MESSAGE + " TEXT,"
+                + KEY_NOTE_PRICE + " INTEGER " + ")";
+        db.execSQL(CREATE_NOTE_TABLE);
     }
 
     // Upgrading database
@@ -35,11 +44,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + DataBaseEnums.TABLE_PROPERTY);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTE);
 
         // Create tables again
         onCreate(db);
     }
-
-
-
 }
+

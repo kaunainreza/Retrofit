@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.retrofit.DetailActivity;
+import com.example.retrofit.model.Note;
 import com.example.retrofit.model.Property;
 
 import java.util.ArrayList;
@@ -41,7 +43,7 @@ public class DatabaseRepo {
     }
 
     // code to get the single contact
-    public Property getProperty(int id) {
+    public Property getProperty(String id) {
         SQLiteDatabase db = databaseHandler.getReadableDatabase();
 
         Cursor cursor = db.query(DataBaseEnums.TABLE_PROPERTY, new String[]{DataBaseEnums.KEY_ID,
@@ -51,9 +53,9 @@ public class DatabaseRepo {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Property contact = new Property(cursor.getString(0),
+        Property property = new Property(cursor.getString(0),
                 cursor.getString(1), cursor.getString(2), (long) cursor.getInt(3), cursor.getInt(4) != 0);
-        return contact;
+        return property;
     }
 
     // code to get all contacts in a list view
@@ -128,4 +130,31 @@ public class DatabaseRepo {
         return cursor.getCount();
     }
 
+
+    //NOTE Add , Update, Delete, getById
+    public void addNote(Note note) {
+        SQLiteDatabase db = databaseHandler.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(DataBaseEnums.KEY_NOTE_ID, note.getId());
+        values.put(DataBaseEnums.KEY_NOTE_MESSAGE, note.getMessage());
+        values.put(DataBaseEnums.KEY_NOTE_PRICE, note.getPrice());
+
+        db.insert(DataBaseEnums.TABLE_NOTE, null, values);
+    }
+
+    // code to get the single contact
+    public Note getNote(String id) {
+        SQLiteDatabase db = databaseHandler.getReadableDatabase();
+
+        Cursor cursor = db.query(DataBaseEnums.TABLE_NOTE, new String[]{DataBaseEnums.KEY_NOTE_ID,
+                        DataBaseEnums.KEY_NOTE_MESSAGE, DataBaseEnums.KEY_PRICE}, DataBaseEnums.KEY_NOTE_ID + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Note note = new Note(cursor.getString(0),
+                cursor.getString(1), (long) cursor.getInt(2));
+        return note;
+    }
 }

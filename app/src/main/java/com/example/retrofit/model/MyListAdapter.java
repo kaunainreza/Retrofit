@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -96,6 +97,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
         public TextView textViewP;
         public TextView textViewT;
         public CheckBox checkBox;
+        public Button moreBtn;
         public RelativeLayout relativeLayout;
 
         public ViewHolder(View itemView) {
@@ -106,6 +108,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
             this.textViewT = (TextView) itemView.findViewById(R.id.textViewT);
             this.checkBox = (CheckBox) itemView.findViewById(R.id.checkboxSelect);
             relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relativeLayout);
+            this.moreBtn = (Button) itemView.findViewById(R.id.moreBtn);
         }
     }
 }
